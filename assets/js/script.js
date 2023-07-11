@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
@@ -25,7 +24,9 @@ const overlay = document.querySelector("[data-overlay]");
 // modal variable
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
+const modalYear = document.querySelector("[data-modal-container] time");
 const modalText = document.querySelector("[data-modal-text]");
+const modalLink = document.querySelector("[data-modal-container] a");
 
 // modal toggle function
 const testimonialsModalFunc = function () {
@@ -92,6 +93,29 @@ const filterFunc = function (selectedValue) {
 
   }
 
+}
+
+// add click event to all modal items
+for (let i = 0; i < filterItems.length; i++) {
+
+  filterItems[i].addEventListener("click", function () {
+
+    modalImg.src = this.querySelector("[data-project-img]").src;
+    modalImg.alt = this.querySelector("[data-project-img]").alt;
+    modalTitle.innerHTML = this.querySelector(".project-title").innerHTML;
+    modalYear.innerHTML = this.dataset.year;
+    modalText.innerHTML = '<p>' + this.dataset.summary + '</p>';
+    modalLink.href = this.dataset.link ? this.dataset.link : "#";
+    portfolioModalFunc();
+
+  });
+
+}
+
+// modal toggle function
+const portfolioModalFunc = function () {
+  modalContainer.classList.toggle("active");
+  overlay.classList.toggle("active");
 }
 
 // add event in all filter button items for large screen
